@@ -1,5 +1,5 @@
 const { Client, Collection } = require("discord.js");
-const { config } = require("dotenv");
+//const { config } = require("dotenv");
 const cron = require('cron')
 
 const client = new Client();
