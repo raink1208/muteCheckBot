@@ -18,8 +18,13 @@ const schedule = new cron.CronJob('0 */10 * * * *', () => {
     let channel = guild.channels.cache.get("726395067039744020")
     let msg = muteMember.map(member => member.displayName)
 
-    channel.send("ミュートのメンバー")
-    channel.send(msg.join(", "))
+    if (msg.length >= 1) {
+        channel.send("ミュートのメンバー")
+        channel.send(msg.join(", "))
+        return
+    }
+
+    channel.send("ミュートのメンバーはいません")
 });
 
 client.on("ready", () => {
