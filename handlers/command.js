@@ -7,13 +7,13 @@ module.exports = (client) => {
         for (let file of commands) {
             let p = require(`../commands/${dir}/${file}`);
             if (p.name) {
-                client.commands.set(p.name, p);
+                client.commands.set(p.name.toLowerCase(), p);
                 console.log("command: " + p.name + "を読み込みました");
             } else {
                 console.log("file: "+ file + ".jsを読み込めませんでした");
                 continue;
             }
-            if (p.aliases && Array.isArray(p.aliases)) p.aliases.forEach(alias => client.aliases.set(alias, p.name))
+            if (p.aliases && Array.isArray(p.aliases)) p.aliases.forEach(alias => client.aliases.set(alias.toLowerCase(), p.name.toLowerCase()))
         }
     });
 };
