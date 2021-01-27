@@ -1,5 +1,6 @@
-const { Client, Collection} = require("discord.js");
-const { config } = require("dotenv")
+const { Client, Collection } = require("discord.js");
+const { config } = require("dotenv");
+const cron = require('cron')
 
 const client = new Client();
 
@@ -16,8 +17,19 @@ client.aliases = new Collection();
     require(`./handlers/${handler}`)(client)
 });
 
+const schedule = new cron.CronJob('* */10 * * * *', () => {
+    let guild = client.guilds.cache.get("694141924562567219")
+    let muteMember = guild.members.cache.filter(member => member.voice.mute)
+    let channel = guild.channels.cache.get("726395067039744020")
+    let msg = muteMember.map(member => member.displayName)
+
+    channel.send("ミュートのメンバー")
+    channel.send(msg.join(", "))
+});
+
 client.on("ready", () => {
     console.log(`botが起動しました`)
+    schedule.start()
 });
 
 client.on("message", message => {
