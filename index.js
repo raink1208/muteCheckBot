@@ -20,14 +20,14 @@ const schedule = new cron.CronJob('0 0,10,20,30,40,50 * * * *', () => {
 
     let muteMember = guild.members.cache.filter(member => member.voice.mute);
     let channel = guild.channels.cache.get("726395067039744020");
-    let msg = muteMember.map(member => member.displayName);
+    let msg = muteMember.map(member => `${member.displayName}:${member.user.username}`);
 
     console.log("ミュートしているメンバーのcheck");
     console.log(msg);
 
     if (msg.length >= 1) {
         channel.send("ミュートのメンバー");
-        channel.send(msg.join(", "));
+        channel.send(msg.join("\n"));
         return;
     }
 
