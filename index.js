@@ -12,7 +12,7 @@ client.aliases = new Collection();
     require(`./handlers/${handler}`)(client)
 });
 
-const schedule = new cron.CronJob('0 */10 * * * *', () => {
+const schedule = new cron.CronJob('0 0,10,20,30,40,50 * * * *', () => {
     let guild = client.guilds.cache.get("694141924562567219")
     let muteMember = guild.members.cache.filter(member => member.voice.mute)
     let channel = guild.channels.cache.get("726395067039744020")
