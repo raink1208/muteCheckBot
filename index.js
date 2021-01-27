@@ -18,7 +18,7 @@ const schedule = new cron.CronJob('0 0,10,20,30,40,50 * * * *', () => {
     let mainVc = guild.channels.cache.get("706411365698371605");
     if (mainVc.members.size === 0) return;
 
-    let muteMember = guild.members.cache.filter(member => member.voice.mute);
+    let muteMember = mainVc.members.filter(member => member.voice.mute);
     let channel = guild.channels.cache.get("726395067039744020");
     let msg = muteMember.map(member => `${member.displayName}:${member.user.username}`);
 
