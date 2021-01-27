@@ -1,14 +1,9 @@
 const { Client, Collection } = require("discord.js");
-//const { config } = require("dotenv");
 const cron = require('cron')
 
 const client = new Client();
 
 const prefix = "_" //コマンドの最初の文字
-
-config({
-    path: __dirname + "/.env"
-});
 
 client.commands = new Collection();
 client.aliases = new Collection();
