@@ -1,5 +1,5 @@
 const { Client, Collection } = require("discord.js");
-const cron = require('cron')
+const cron = require('cron');
 
 const client = new Client();
 
@@ -13,30 +13,30 @@ client.aliases = new Collection();
 });
 
 const schedule = new cron.CronJob('0 0,10,20,30,40,50 * * * *', () => {
-    let guild = client.guilds.cache.get("694141924562567219")
+    let guild = client.guilds.cache.get("694141924562567219");
 
-    let member = guild.members.cache.filter(member => member.voice.channel !== null)
-    if (member.size === 0) return;
+    let mainVc = guild.channels.cache.get("706411365698371605");
+    if (mainVc.members.size === 0) return;
 
-    let muteMember = guild.members.cache.filter(member => member.voice.mute)
-    let channel = guild.channels.cache.get("726395067039744020")
-    let msg = muteMember.map(member => member.displayName)
+    let muteMember = guild.members.cache.filter(member => member.voice.mute);
+    let channel = guild.channels.cache.get("726395067039744020");
+    let msg = muteMember.map(member => member.displayName);
 
-    console.log("ミュートしているメンバーのcheck")
-    console.log(msg)
+    console.log("ミュートしているメンバーのcheck");
+    console.log(msg);
 
     if (msg.length >= 1) {
-        channel.send("ミュートのメンバー")
-        channel.send(msg.join(", "))
-        return
+        channel.send("ミュートのメンバー");
+        channel.send(msg.join(", "));
+        return;
     }
 
-    channel.send("ミュートのメンバーはいません")
+    channel.send("ミュートのメンバーはいません");
 });
 
 client.on("ready", () => {
-    console.log(`botが起動しました`)
-    schedule.start()
+    console.log(`botが起動しました`);
+    schedule.start();
 });
 
 client.on("message", message => {
