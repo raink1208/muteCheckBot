@@ -1,5 +1,10 @@
 const { Client, Collection } = require("discord.js");
 const cron = require('cron');
+const { config } = require("dotenv");
+
+config({
+    path: __dirname + "/.env"
+});
 
 const client = new Client();
 
@@ -61,4 +66,4 @@ client.on("message", message => {
     }
 });
 
-client.login();
+client.login(process.env.TOKEN);
