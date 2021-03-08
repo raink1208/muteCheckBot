@@ -2,6 +2,8 @@ const { Client, Collection } = require("discord.js");
 const cron = require('cron');
 const { config } = require("dotenv");
 
+const utils = require("./util")
+
 config({
     path: __dirname + "/.env"
 });
@@ -27,8 +29,8 @@ const schedule = new cron.CronJob('0 0,10,20,30,40,50 * * * *', () => {
     let channel = guild.channels.cache.get("726395067039744020");
     let msg = muteMember.map(member => `${member.displayName}:${member.user.username}`);
 
-    console.log("ミュートしているメンバーのcheck");
-    console.log(msg);
+    utils.log("ミュートしているメンバーのcheck");
+    utils.log(msg);
 
     if (msg.length >= 1) {
         channel.send("ミュートのメンバー");
@@ -40,7 +42,7 @@ const schedule = new cron.CronJob('0 0,10,20,30,40,50 * * * *', () => {
 });
 
 client.on("ready", () => {
-    console.log(`botが起動しました`);
+    utils.log(`botが起動しました`);
     schedule.start();
 });
 
@@ -62,7 +64,7 @@ client.on("message", message => {
 
     if (command.enabled) {
         command.run(client, message, args);
-        console.log(message.author.username + "が" + command.name + "を使用しました");
+        utils.log(message.author.username + "が" + command.name + "を使用しました");
     }
 });
 
